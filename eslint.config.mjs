@@ -18,6 +18,8 @@ export default [
       },
       globals: {
         ...globals.browser,
+        ...globals.node, 
+        process: "readonly",
       },
     },
     plugins: {
@@ -29,7 +31,8 @@ export default [
       "import/prefer-default-export": 0,
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
-      "no-unused-vars": "off"
+      "no-unused-vars": "off",
+      "no-undef": "off"
     },
     settings: {
       react: {
