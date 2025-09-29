@@ -1,0 +1,106 @@
+import { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { toast } from 'react-toastify';
+import { isEmail } from 'validator';
+import { useNavigate } from 'react-router-dom';
+
+import { Container } from '../../styles/GlobalStyles';
+import { Form } from './styled';
+import Loading from '../../components/Loading';
+import * as actions from '../../store/modules/auth/actions';
+
+export default function Register() {
+  const id = useSelector((state) => state.auth.user.id);
+  const nomeStored = useSelector((state) => state.auth.user.nome);
+  const emailStored = useSelector((state) => state.auth.user.email);
+  const isLoading = useSelector((state) => state.auth.isLoading);
+
+  const [nome, setNome] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (!id) return;
+
+    setEmail(emailStored);
+    setNome(nomeStored);
+  }, [emailStored, nomeStored, id]);
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    let formErrors = false;
+
+    if (nome.length < 3 || nome.length > 150) {
+      formErrors = true;
+      toast.error('O campo nome deve conter entre 3 e 150 caracteres');
+    }
+
+    if (!isEmail(email)) {
+      formErrors = true;
+      toast.error('Email inválido');
+    }
+
+    if (!id && (password.length < 6 || password.length > 50)) {
+      formErrors = true;
+      toast.error('A senha deve conter entre 6 e 50 caracteres');
+    }
+
+    if (formErrors) return;
+
+    dispatch(
+      actions.registerRequest({
+        id,
+        nome,
+        email,
+        password: password || undefined,
+        navigate
+      })
+    );
+  }
+
+  return (
+    <Container>
+      <Loading isLoading={isLoading} />
+      <h1>{id ? 'Editar Usuário' : 'Criar Usuário'}</h1>
+
+      <Form onSubmit={handleSubmit}>
+        <label htmlFor="nome">
+          Nome:
+          <input
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            placeholder="Seu nome completo"
+          />
+        </label>
+
+        <label htmlFor="email">
+          Email:
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Seu melhor email"
+          />
+        </label>
+
+        <label htmlFor="password">
+          Senha:
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder={id ? 'Editar Senha' : 'Digite uma Senha'}
+          />
+        </label>
+
+        <div className="button">
+          <button type="submit">{id ? 'Salvar' : 'Criar Conta'}</button>
+        </div>
+      </Form>
+    </Container>
+  );
+}
