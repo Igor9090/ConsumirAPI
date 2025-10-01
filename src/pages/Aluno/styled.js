@@ -32,9 +32,25 @@ export const Form = styled.form`
     padding: 0 10px;
     margin-top: 5px;
 
-      &:focus {
-        border: 2px solid ${colors.dark};
-      }
+    &:focus {
+      border: 2px solid ${colors.dark};
+    }
+  }
+
+  @media (max-width: 520px) {
+    label {
+      margin-bottom: 15px;
+    }
+
+    input {
+      height: 28px;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    button {
+      width: 30%;
+    }
   }
 `;
 
@@ -46,16 +62,16 @@ export const ProfilePicture = styled.div`
   position: relative;
   margin: top;
 
-  img{
+  img {
     height: 180px;
     width: 180px;
     border-radius: 50%;
     object-fit: cover;
   }
 
-  a{
+  a {
     display: flex;
-    justify-content:center ;
+    justify-content: center;
     align-items: center;
     border: none;
     position: absolute;
@@ -67,4 +83,16 @@ export const ProfilePicture = styled.div`
     padding: 5px;
     border-radius: 50%;
   }
-`
+
+  @media (max-width: 520px) {
+    padding: 0 0 0 10px;
+
+    img {
+      height: 90px;
+      width: 90px;
+      border-radius: 50%;
+      margin: 20px;
+      object-fit: cover;
+    }
+  }
+`;

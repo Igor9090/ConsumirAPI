@@ -53,5 +53,14 @@ export const Container = styled.section`
   padding: 30px;
   background: white;
   border-radius: 5px;
-  box-shadow: 0 0 10px rgba(0 ,0 ,0 , 0.1)
+  box-shadow: 0 0 10px rgba(0 ,0 ,0 , 0.1);
+
+  @media (max-width: 520px){
+    max-width: 80%;
+
+    h1{
+      text-align: center;
+      font-size: 28px;
+    }
+  }
 `;

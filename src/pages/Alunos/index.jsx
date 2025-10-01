@@ -82,7 +82,7 @@ export default function Alunos() {
                   alt={aluno.nome}
                 />
               ) : (
-                <FaUserCircle size={36} />
+                <FaUserCircle />
               )}
             </ProfilePicture>
 
@@ -93,10 +93,10 @@ export default function Alunos() {
 
             <div className="aluno-actions">
               <Link to={`/aluno/${aluno.id}/edit`}>
-                <FaEdit size={16} className="edit" />
+                <FaEdit className="edit" />
               </Link>
               <Link to={`/aluno/${aluno.id}/delete`} onClick={handleDeleteAsk}>
-                <FaWindowClose size={16} className="delete" />
+                <FaWindowClose className="delete" />
               </Link>
 
               <FaExclamation

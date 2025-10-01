@@ -1,23 +1,23 @@
-import styled from "styled-components";
-import { colors } from "../../config/colors"
+import styled from 'styled-components';
+import { colors } from '../../config/colors';
 
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
   margin-top: 15px;
 
-  label{
+  label {
     display: flex;
     flex-direction: column;
     margin-bottom: 20px;
   }
 
-  .button{
+  .button {
     display: flex;
     justify-content: end;
   }
 
-  button{
+  button {
     width: 15%;
     padding: 10px;
     margin: 0;
@@ -31,8 +31,26 @@ export const Form = styled.form`
     padding: 0 10px;
     margin-top: 5px;
 
-    &:focus{
+    &:focus {
       border: 2px solid ${colors.dark};
     }
   }
-`
+
+  @media (max-width: 520px) {
+    label {
+      margin-bottom: 15px;
+      font-size: 15px;
+    }
+
+    input {
+      height: 28px;
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 5px;
+    }
+
+    button {
+      width: 35%;
+    }
+  }
+`;
